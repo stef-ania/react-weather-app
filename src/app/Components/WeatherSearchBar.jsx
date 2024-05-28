@@ -38,12 +38,33 @@ export default function SearchEngine() {
         const { currentDay, currentTime } = getCurrentDayAndTime();
         const forecast =
           forecastResponse.data && forecastResponse.data.list && forecastResponse.data.list.length > 0
-            ? forecastResponse.data.list.map((item) => ({
-                day: item.dt_txt,
-                maxTemp: Math.round(item.main.temp_max),
-                minTemp: Math.round(item.main.temp_min),
-                icon: item.weather[0].icon,
-              }))
+            ? forecastResponse.data.list.reduce((acc, item) => {
+                const day = formatUnixTimestamp(item.dt);
+
+                // Verificar si ya existe un pronóstico para este día
+                const existingDay = acc.find((forecastDay) => forecastDay.day === day);
+
+                // Si no existe, agregar un nuevo pronóstico para este día
+                if (!existingDay) {
+                  acc.push({
+                    day: day,
+                    maxTemp: Math.round(item.main.temp_max),
+                    minTemp: Math.round(item.main.temp_min),
+                    icon: item.weather[0].icon,
+                  });
+                } else {
+                  // Si ya existe, actualizar las temperaturas máxima y mínima si son más altas o más bajas
+                  if (Math.round(item.main.temp_max) > existingDay.maxTemp) {
+                    existingDay.maxTemp = Math.round(item.main.temp_max);
+                  }
+                  if (Math.round(item.main.temp_min) < existingDay.minTemp) {
+                    existingDay.minTemp = Math.round(item.main.temp_min);
+                  }
+                }
+
+                // Verificar si ya se han agregado 7 días
+                return acc.length === 7 ? acc : acc;
+              }, [])
             : [];
 
         const weatherData = {
@@ -94,9 +115,9 @@ export default function SearchEngine() {
       {formData.loading && (
         <TailSpin
           visible={true}
-          height={80}
-          width={80}
-          color="blue"
+          height={48}
+          width={48}
+          color="#333"
           ariaLabel="tail-spin-loading"
           wrapperStyle={{}}
           wrapperClass=""

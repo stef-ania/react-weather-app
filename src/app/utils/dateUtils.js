@@ -23,5 +23,5 @@ export function getNextSixDays() {
 }
 
 export function formatUnixTimestamp(unixTimestamp) {
-  return moment.unix(unixTimestamp).format("YYYY-MM-DD HH:mm:ss");
+  return moment.unix(unixTimestamp).format("dddd");
 }

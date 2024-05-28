@@ -6,7 +6,7 @@ export default function WeatherInfo({ city, temperature, description, humidity, 
       <p>{city}</p>
       <p>{temperature}°C</p>
       <p>Description: {description}</p>
-      <p>Humidity: {humidity}</p>
+      <p>Humidity: {humidity}%</p>
       <p>Wind: {wind}km/h</p>
       <p>Day: {day}</p>
       <p>Time: {time}</p>

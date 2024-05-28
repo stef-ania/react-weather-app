@@ -3,7 +3,7 @@ import React from "react";
 export default function WeatherForecast({ forecast }) {
   return (
     <div>
-      <h3>Weather Forecast for the Next 6 Days</h3>
+      <h3>Weather Forecast for the Next 7 Days</h3>
       <ul>
         {forecast.map((day, index) => (
           <li key={index}>
