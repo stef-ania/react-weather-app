@@ -1,7 +1,8 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { TailSpin } from "react-loader-spinner";
 import { weather_api } from "../services/weather_api";
+import { getCurrentDayAndTime, getTomorrow, getNextSixDays } from "../utils/dateUtils";
 
 export default function SearchEngine() {
   const [formData, setFormData] = useState({
@@ -10,6 +11,18 @@ export default function SearchEngine() {
     loading: false,
     submitted: false,
   });
+
+  useEffect(() => {
+    const { currentDay, currentTime } = getCurrentDayAndTime();
+    console.log("Current Day:", currentDay);
+    console.log("Current Time:", currentTime);
+
+    const tomorrow = getTomorrow();
+    console.log("Tomorrow:", tomorrow);
+
+    const nextSixDays = getNextSixDays();
+    console.log("Next 6 Days:", nextSixDays);
+  }, []);
 
   function fetchWeather(city) {
     const service = weather_api();
