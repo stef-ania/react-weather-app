@@ -2,12 +2,13 @@
 import React, { useState, useEffect } from "react";
 import { TailSpin } from "react-loader-spinner";
 import { weather_api } from "../services/weather_api";
-import { getCurrentDayAndTime, getTomorrow, getNextSixDays } from "../utils/dateUtils";
+import { getCurrentDayAndTime } from "../utils/dateUtils";
+import WeatherInfo from "./WeatherInfo";
 
 export default function SearchEngine() {
   const [formData, setFormData] = useState({
     city: "Barcelona",
-    messages: [],
+    weather: null,
     loading: false,
     submitted: false,
   });
@@ -34,20 +35,20 @@ export default function SearchEngine() {
         const weatherIcon = response.data.weather[0].icon;
         const { currentDay, currentTime } = getCurrentDayAndTime();
 
-        const newMessages = [
-          `It is currently ${currentTemperature}°C in ${city}`,
-          `Description: ${weatherDescription}`,
-          `Humidity: ${humidity}`,
-          `Wind: ${wind}km/h`,
-          `Day: ${currentDay}`,
-          `Time: ${currentTime}`,
-          `${weatherIcon}`,
-        ];
+        const weatherData = {
+          city,
+          temperature: currentTemperature,
+          description: weatherDescription,
+          humidity,
+          wind,
+          day: currentDay,
+          time: currentTime,
+          icon: weatherIcon,
+        };
 
         setFormData({
           ...formData,
-          city,
-          messages: newMessages,
+          weather: weatherData,
           loading: false,
           submitted: true,
         });
@@ -89,19 +90,7 @@ export default function SearchEngine() {
           wrapperClass=""
         />
       )}
-      {formData.submitted && !formData.loading && (
-        <ul>
-          {formData.messages.map((message, index) => (
-            <li key={index}>
-              {index === 6 ? (
-                <img src={`http://openweathermap.org/img/wn/${message}.png`} alt="Weather Icon" />
-              ) : (
-                message
-              )}
-            </li>
-          ))}
-        </ul>
-      )}
+      {formData.submitted && !formData.loading && formData.weather && <WeatherInfo {...formData.weather} />}
     </form>
   );
 }
