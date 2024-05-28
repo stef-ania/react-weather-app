@@ -4,15 +4,14 @@ import { TailSpin } from "react-loader-spinner";
 import { weather_api } from "../services/weather_api";
 
 export default function SearchEngine() {
-  const [city, setCity] = useState("");
-  const [messages, setMessages] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
+  const [formData, setFormData] = useState({
+    city: "",
+    messages: [],
+    loading: false,
+    submitted: false,
+  });
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    setLoading(true);
-
+  function fetchWeather(city) {
     const service = weather_api();
 
     service
@@ -32,47 +31,65 @@ export default function SearchEngine() {
           `${weatherIcon}`,
         ];
 
-        setMessages(newMessages);
-        setLoading(false);
-        setSubmitted(true);
+        setFormData({
+          ...formData,
+          messages: newMessages,
+          loading: false,
+          submitted: true,
+        });
       })
       .catch((error) => {
         console.error("Error fetching weather data:", error);
-        setLoading(false);
-        setSubmitted(true);
+        setFormData({
+          ...formData,
+          loading: false,
+          submitted: true,
+        });
       });
   }
 
+  function handleSubmit(event) {
+    event.preventDefault();
+    setFormData({
+      ...formData,
+      loading: true,
+    });
+    fetchWeather(formData.city);
+  }
+
   function updateCity(event) {
-    setCity(event.target.value);
+    setFormData({
+      ...formData,
+      city: event.target.value,
+    });
   }
 
   return (
     <form onSubmit={handleSubmit}>
       <input type="search" placeholder="Enter city name" onChange={updateCity} />
       <input type="submit" value="Search" />
-      {loading ? (
+      {formData.loading && (
         <TailSpin
           visible={true}
-          height="80"
-          width="80"
-          color="violet"
+          height={80}
+          width={80}
+          color="blue"
           ariaLabel="tail-spin-loading"
           wrapperStyle={{}}
           wrapperClass=""
         />
-      ) : null}
-      {submitted && !loading && (
+      )}
+      {formData.submitted && !formData.loading && (
         <ul>
-          {messages.map((message, index) => [
-            index === 4 ? (
-              <li key={index}>
+          {formData.messages.map((message, index) => (
+            <li key={index}>
+              {index === 4 ? (
                 <img src={`http://openweathermap.org/img/wn/${message}.png`} alt="Weather Icon" />
-              </li>
-            ) : (
-              <li key={index}>{message}</li>
-            ),
-          ])}
+              ) : (
+                message
+              )}
+            </li>
+          ))}
         </ul>
       )}
     </form>
