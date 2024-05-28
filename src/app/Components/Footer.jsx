@@ -6,7 +6,7 @@ export default function Footer() {
       This project is
       <strong>
         {" "}
-        <a href="https://github.com/stef-ania/" target="_blank">
+        <a href="https://github.com/stef-ania/react-weather-app" target="_blank">
           open-sourced on GitHub
         </a>
       </strong>

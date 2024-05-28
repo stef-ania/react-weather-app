@@ -6,26 +6,23 @@ import { getCurrentDayAndTime, getTomorrow, getNextSixDays } from "../utils/date
 
 export default function SearchEngine() {
   const [formData, setFormData] = useState({
-    city: "",
+    city: "Barcelona",
     messages: [],
     loading: false,
     submitted: false,
   });
 
   useEffect(() => {
-    const { currentDay, currentTime } = getCurrentDayAndTime();
-    console.log("Current Day:", currentDay);
-    console.log("Current Time:", currentTime);
-
-    const tomorrow = getTomorrow();
-    console.log("Tomorrow:", tomorrow);
-
-    const nextSixDays = getNextSixDays();
-    console.log("Next 6 Days:", nextSixDays);
+    fetchWeather("Barcelona");
   }, []);
 
   function fetchWeather(city) {
     const service = weather_api();
+
+    setFormData({
+      ...formData,
+      loading: true,
+    });
 
     service
       .getWeather(city)
@@ -35,17 +32,21 @@ export default function SearchEngine() {
         const humidity = response.data.main.humidity;
         const wind = response.data.wind.speed;
         const weatherIcon = response.data.weather[0].icon;
+        const { currentDay, currentTime } = getCurrentDayAndTime();
 
         const newMessages = [
           `It is currently ${currentTemperature}°C in ${city}`,
           `Description: ${weatherDescription}`,
           `Humidity: ${humidity}`,
           `Wind: ${wind}km/h`,
+          `Day: ${currentDay}`,
+          `Time: ${currentTime}`,
           `${weatherIcon}`,
         ];
 
         setFormData({
           ...formData,
+          city,
           messages: newMessages,
           loading: false,
           submitted: true,
@@ -63,10 +64,6 @@ export default function SearchEngine() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    setFormData({
-      ...formData,
-      loading: true,
-    });
     fetchWeather(formData.city);
   }
 
@@ -96,7 +93,7 @@ export default function SearchEngine() {
         <ul>
           {formData.messages.map((message, index) => (
             <li key={index}>
-              {index === 4 ? (
+              {index === 6 ? (
                 <img src={`http://openweathermap.org/img/wn/${message}.png`} alt="Weather Icon" />
               ) : (
                 message
