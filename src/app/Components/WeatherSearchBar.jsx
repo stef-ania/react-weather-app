@@ -1,9 +1,9 @@
 "use client";
 import React, { useState } from "react";
-import axios from "axios";
 import { TailSpin } from "react-loader-spinner";
+import { weather_api } from "../services/weather_api";
 
-export default function SearchEngine(props) {
+export default function SearchEngine() {
   const [city, setCity] = useState("");
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -12,10 +12,11 @@ export default function SearchEngine(props) {
   function handleSubmit(event) {
     event.preventDefault();
     setLoading(true);
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=f4d1475cfe015c4c50b2300aa82dd590&units=metric`;
 
-    axios
-      .get(url)
+    const service = weather_api();
+
+    service
+      .getWeather(city)
       .then((response) => {
         const currentTemperature = Math.round(response.data.main.temp);
         const weatherDescription = response.data.weather[0].description;
@@ -65,9 +66,8 @@ export default function SearchEngine(props) {
         <ul>
           {messages.map((message, index) => [
             index === 4 ? (
-              <li>
-                {" "}
-                <img key={index} src={`http://openweathermap.org/img/wn/${message}.png`} alt="Weather Icon" />
+              <li key={index}>
+                <img src={`http://openweathermap.org/img/wn/${message}.png`} alt="Weather Icon" />
               </li>
             ) : (
               <li key={index}>{message}</li>
