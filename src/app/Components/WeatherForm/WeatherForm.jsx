@@ -1,14 +1,15 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { TailSpin } from "react-loader-spinner";
-import { weatherServiceCurrentDay, weatherServiceForecast } from "../services/weatherService";
-import WeatherInfo from "./WeatherInfo";
-import WeatherForecast from "./WeatherForecast";
-import { extractWeatherData, extractForecastData } from "../utils/weatherUtils";
+import { weatherServiceCurrentDay, weatherServiceForecast } from "../../services/weatherService";
+import WeatherInfo from "../WeatherInfo/WeatherInfo.jsx";
+import WeatherForecast from "../WeatherForecast/WeatherForecast";
+import { extractWeatherData, extractForecastData } from "../../utils/weatherUtils";
+import styles from "./WeatherForm.module.css";
 
 const DEFAULT_CITY = "Barcelona";
 
-export default function SearchEngine() {
+export default function WeatherForm() {
   const [formData, setFormData] = useState({
     city: DEFAULT_CITY,
     weather: null,
@@ -75,7 +76,7 @@ export default function SearchEngine() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className={styles.weatherForm}>
       <input type="search" placeholder="Enter city name" onChange={updateCity} />
       <input type="submit" value="Search" />
       {formData.loading && (

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import styles from "./page.module.css";
-import WeatherForm from "./Components/WeatherForm.jsx";
-import Footer from "./Components/Footer";
+import WeatherForm from "./Components/WeatherForm/WeatherForm.jsx";
+import Footer from "./Components/Footer/Footer.jsx";
 
 export default function Home() {
   return (

@@ -1,8 +1,9 @@
 import React from "react";
+import styles from "./WeatherInfo.module.css";
 
 export default function WeatherInfo({ city, temperature, description, humidity, wind, day, time, icon }) {
   return (
-    <div>
+    <div className={styles.weatherInfoWrapper}>
       <p>{city}</p>
       <p>{temperature}°C</p>
       <p>Description: {description}</p>

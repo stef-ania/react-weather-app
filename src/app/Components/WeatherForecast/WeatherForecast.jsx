@@ -1,8 +1,9 @@
 import React from "react";
+import styles from "./WeatherForecast.module.css";
 
 export default function WeatherForecast({ forecast }) {
   return (
-    <div>
+    <div className={styles.forecastWrapper}>
       <h3>Weather Forecast for the Next 7 Days</h3>
       <ul>
         {forecast.map((day, index) => (
