@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { TailSpin } from "react-loader-spinner";
-import { weather_api, weather_api_forecast } from "../services/weather_api";
+import { weatherServiceCurrentDay, weatherServiceForecast } from "../services/weatherService";
 import WeatherInfo from "./WeatherInfo";
 import WeatherForecast from "./WeatherForecast";
 import { extractWeatherData, extractForecastData } from "../utils/weatherUtils";
@@ -51,13 +51,13 @@ export default function SearchEngine() {
   }
 
   async function getWeather(city) {
-    const service = weather_api();
+    const service = weatherServiceCurrentDay();
     const response = await service.getWeather(city);
     return response;
   }
 
   async function getWeatherForecast(city) {
-    const serviceForecast = weather_api_forecast();
+    const serviceForecast = weatherServiceForecast();
     const response = await serviceForecast.getWeatherForecast(city);
     return response;
   }
