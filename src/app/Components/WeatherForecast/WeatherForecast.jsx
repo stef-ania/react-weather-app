@@ -13,7 +13,6 @@ export default function WeatherForecast({ forecast }) {
             <p>Max Temperature: {day.maxTemp}°C</p>
             <p>Min Temperature: {day.minTemp}°C</p>
             <WeatherIcon code={day.icon} alt={day.description} />
-            {/* <img src={`http://openweathermap.org/img/wn/${day.icon}.png`} alt="Weather Icon" />*/}
           </li>
         ))}
       </ul>

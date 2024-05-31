@@ -58,8 +58,14 @@ export default function WeatherForm() {
   }
 
   async function getWeatherForecast(city) {
+    // Obtener la longitud y latitud de la respuesta del servicio weatherServiceCurrentDay
+    const currentDayResponse = await getWeather(city);
+    const { coord } = currentDayResponse.data;
+    const { lat, lon } = coord;
+
+    //Llamamos al servicio:
     const serviceForecast = weatherServiceForecast();
-    const response = await serviceForecast.getWeatherForecast(city);
+    const response = await serviceForecast.getWeatherForecast(lat, lon);
     return response;
   }
 

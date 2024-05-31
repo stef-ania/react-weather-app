@@ -18,8 +18,8 @@ export const weatherServiceCurrentDay = () => {
 };
 
 export const weatherServiceForecast = () => {
-  const getWeatherForecast = async (city) => {
-    const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&APPID=${APP_ID}&units=metric`;
+  const getWeatherForecast = async (lat, lon) => {
+    const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${APP_ID}&units=metric`;
     const response = await axios.get(url);
     return response;
   };
