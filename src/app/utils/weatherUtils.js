@@ -25,6 +25,8 @@ export function extractForecastData(forecastResponse) {
   const data = forecastResponse.data;
   const forecastList = data?.list || [];
 
+  const { currentTime } = getCurrentDayAndTime();
+
   return forecastList.reduce((acc, item) => {
     const day = formatUnixTimestamp(item.dt);
     const existingDay = acc.find((forecastDay) => forecastDay.day === day);
@@ -32,6 +34,7 @@ export function extractForecastData(forecastResponse) {
     if (!existingDay) {
       acc.push({
         day: day,
+        time: currentTime,
         maxTemp: Math.round(item.main.temp_max),
         minTemp: Math.round(item.main.temp_min),
         icon: item.weather[0].icon,
