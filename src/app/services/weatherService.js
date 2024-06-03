@@ -9,9 +9,9 @@ export const weatherServiceCurrentDay = () => {
   const getWeather = async (city) => {
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${APP_ID}&units=metric`;
     const response = await axios.get(url);
+    console.log(response.data);
     return response;
   };
-
   return {
     getWeather,
   };
@@ -23,7 +23,6 @@ export const weatherServiceForecast = () => {
     const response = await axios.get(url);
     return response;
   };
-
   return {
     getWeatherForecast,
   };

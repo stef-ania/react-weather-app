@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./WeatherInfo.module.css";
 import WeatherIcon from "../WeatherIcon/WeatherIcon";
+import dateUtils from "../../utils/dateUtils";
 
 export default function WeatherInfo({ city, temperature, description, humidity, wind, day, time, icon }) {
   return (
