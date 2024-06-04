@@ -5,7 +5,7 @@ import WeatherIcon from "../WeatherIcon/WeatherIcon";
 export default function WeatherInfo({ city, temperature, description, humidity, wind, day, time, icon }) {
   return (
     <div className={styles.weatherInfoWrapper}>
-      <div className={styles.weatherMainInfo}>
+      <div className={styles.weatherCurrentInfo}>
         <h1>{city}</h1>
         <p className={styles.weatherText}>
           {day} {time}, {description}
@@ -15,7 +15,7 @@ export default function WeatherInfo({ city, temperature, description, humidity, 
           <strong className={styles.weatherAccent}>{wind}km/h</strong>
         </p>
       </div>
-      <div className={styles.weatherMainTemperatureWrapper}>
+      <div className={styles.weatherCurrentTemperatureWrapper}>
         <WeatherIcon code={icon} alt={description} />{" "}
         <span className={styles.weatherTemperature}>
           {temperature}

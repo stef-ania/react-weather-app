@@ -84,7 +84,7 @@ export default function WeatherForm() {
   return (
     <>
       <form onSubmit={handleSubmit} className={styles.weatherForm}>
-        <input type="search" className={styles.searchInput} placeholder="Enter city name" onChange={updateCity} />
+        <input type="search" className={styles.searchInput} placeholder="Enter a city" onChange={updateCity} />
         <input type="submit" value="Search" className={styles.submitInput} />
       </form>
       {formData.loading && (
