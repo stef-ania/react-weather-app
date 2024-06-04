@@ -82,9 +82,11 @@ export default function WeatherForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className={styles.weatherForm}>
-      <input type="search" placeholder="Enter city name" onChange={updateCity} />
-      <input type="submit" value="Search" />
+    <>
+      <form onSubmit={handleSubmit} className={styles.weatherForm}>
+        <input type="search" className={styles.searchInput} placeholder="Enter city name" onChange={updateCity} />
+        <input type="submit" value="Search" className={styles.submitInput} />
+      </form>
       {formData.loading && (
         <TailSpin
           visible={true}
@@ -102,6 +104,6 @@ export default function WeatherForm() {
           {formData.forecast && <WeatherForecast forecast={formData.forecast} />}
         </>
       )}
-    </form>
+    </>
   );
 }
