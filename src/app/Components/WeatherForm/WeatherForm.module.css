@@ -10,6 +10,12 @@
   width: 100%;
 }
 
+.loadingIcon {
+  display: flex;
+  justify-content: center;
+  margin: 8rem auto;
+}
+
 .weatherForm .searchInput {
   background: #f9f7fe;
   border: none;
@@ -22,7 +28,7 @@
   line-height: 20px;
   margin-right: 1rem;
   padding: 15px 20px;
-  width: 70%;
+  width: 68%;
 }
 
 .weatherForm .searchInput::placeholder {

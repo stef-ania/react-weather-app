@@ -92,10 +92,10 @@ export default function WeatherForm() {
           visible={true}
           height={48}
           width={48}
-          color="#333"
+          color="#8256f0"
           ariaLabel="tail-spin-loading"
           wrapperStyle={{}}
-          wrapperClass=""
+          wrapperClass={styles.loadingIcon}
         />
       )}
       {formData.submitted && !formData.loading && formData.weather && (

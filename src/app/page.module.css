@@ -1,10 +1,8 @@
-.main {
-  align-items: center;
+.container {
   background-color: #fff;
   border-radius: var(--border-radius-big);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   margin: 60px auto;
   max-width: 768px;
   padding: 2.5rem;
@@ -12,7 +10,7 @@
 
 /* Mobile */
 @media (max-width: 700px) {
-  .main {
+  .container {
     margin: 60px 24px;
     padding: 1.5rem;
   }
