@@ -5,14 +5,15 @@ import WeatherIcon from "../WeatherIcon/WeatherIcon";
 export default function WeatherForecast({ forecast }) {
   return (
     <div className={styles.forecastWrapper}>
-      <h3>Weather Forecast for the Next 7 Days</h3>
-      <ul>
+      <ul className={styles.forecastList}>
         {forecast.map((day, index) => (
           <li key={index}>
-            <p>Day: {day.day}</p>
-            <p>Max Temperature: {day.maxTemp}°C</p>
-            <p>Min Temperature: {day.minTemp}°C</p>
+            <p className={styles.forecastDay}>{day.day}</p>
             <WeatherIcon code={day.icon} alt={day.description} />
+            <p className={styles.forecastMinMax}>
+              <span className={styles.forecastMax}> {day.maxTemp}°</span>{" "}
+              <span className={styles.forecastMin}>{day.minTemp}°</span>
+            </p>
           </li>
         ))}
       </ul>
