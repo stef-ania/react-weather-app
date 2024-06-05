@@ -9,7 +9,7 @@ const openSans = Open_Sans({
 });
 
 export const metadata = {
-  title: "Meteofy simple app",
+  title: "Meteofy - Simple weather app",
   description: "Simple weather application that uses the OpenWeather API to provide up-to-date weather information.",
 };
 
