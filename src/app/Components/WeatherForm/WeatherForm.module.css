@@ -52,6 +52,7 @@
   font-weight: 600;
   height: 50px;
   letter-spacing: 0.3px;
+  min-width: 29%;
   padding: 0.75rem 4rem;
   transition: all 200ms ease-in-out;
 }
