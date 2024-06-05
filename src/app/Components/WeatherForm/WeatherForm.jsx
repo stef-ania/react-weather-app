@@ -4,6 +4,7 @@ import { TailSpin } from "react-loader-spinner";
 import { weatherServiceCurrentDay, weatherServiceForecast } from "../../services/weatherService";
 import WeatherInfo from "../WeatherInfo/WeatherInfo.jsx";
 import WeatherForecast from "../WeatherForecast/WeatherForecast";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import { extractWeatherData, extractForecastData } from "../../utils/weatherUtils";
 import styles from "./WeatherForm.module.css";
 
@@ -16,6 +17,7 @@ export default function WeatherForm() {
     forecast: null,
     loading: false,
     submitted: false,
+    error: null,
   });
 
   useEffect(() => {
@@ -39,6 +41,7 @@ export default function WeatherForm() {
           forecast: forecast,
           loading: false,
           submitted: true,
+          error: null,
         });
       })
       .catch((error) => {
@@ -47,6 +50,7 @@ export default function WeatherForm() {
           ...formData,
           loading: false,
           submitted: true,
+          error: "City not found. Please enter a valid city name.",
         });
       });
   }
@@ -87,6 +91,7 @@ export default function WeatherForm() {
         <input type="search" className={styles.searchInput} placeholder="Enter a city" onChange={updateCity} />
         <input type="submit" value="Search" className={styles.submitInput} />
       </form>
+      {formData.error && <ErrorMessage message={formData.error} />}
       {formData.loading && (
         <TailSpin
           visible={true}
