@@ -50,7 +50,7 @@ export default function WeatherForm() {
           ...formData,
           loading: false,
           submitted: true,
-          error: "City not found. Please enter a valid city name.",
+          error: "Oops! We couldn't find that city. Please check the spelling and try again.",
         });
       });
   }
