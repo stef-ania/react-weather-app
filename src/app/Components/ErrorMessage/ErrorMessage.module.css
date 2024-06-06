@@ -1,5 +1,8 @@
 .errorMessage {
-  color: #f05698;
+  background-color: #fbe9f0;
+  border-radius: 12px;
+  color: #e1146d;
   font-weight: bold;
   margin-top: 2rem;
+  padding: 1.5rem;
 }
